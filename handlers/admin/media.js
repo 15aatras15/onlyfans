@@ -119,7 +119,7 @@ export const saveMedia = async (bot, ctx, user) => {
 
     await bot.sendMessage(
       chatId,
-      texts.media.getLink(CONFIG.botUsername, media.id, mediaTypeText),
+      texts.media.getLink(CONFIG.botUsername, media, mediaTypeText),
       {
         ...adminMenu,
         parse_mode: 'HTML',
