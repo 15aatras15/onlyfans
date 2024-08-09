@@ -23,48 +23,48 @@ export const Start = async (bot, ctx) => {
 
     const mediaId = ctx.text.split(' ').pop()
 
-    if (mediaId !== '/start') {
-      const media = await prisma.media.findUnique({ where: { id: mediaId } })
-
-      if (media && media.files.length > 0) {
-        const files = media.files
-        let messageIds = []
-
-        if (media.tupe === 'L') {
-          const limitedFiles = files.slice(0, 40)
-          for (const file of limitedFiles) {
-            const message = await bot.sendPhoto(chatId, file.id)
-            messageIds.push(message.message_id)
-          }
-        } else {
-
-          const limitedFiles = files.slice(0, 10)
-          const mediaGroup = limitedFiles .map(file => ({
-            type: file.type,
-            media: file.id
-          }))
-          const messages = await bot.sendMediaGroup(chatId, mediaGroup)
-          messageIds = messages.map(message => message.message_id)
-        }
-
-        const warningMsg = await bot.sendMessage(chatId, texts.general.fileWarning)
-        messageIds.push(warningMsg.message_id)
-
-        setTimeout( async () => {
-          for (const messageId of messageIds) {
-            await bot.deleteMessage(chatId, messageId);
-          }
-          bot.sendMessage(chatId, texts.general.deleteMedia, {
-            reply_markup: {
-              inline_keyboard: [[{ text: '♻️ دانلود مجدد', url: `https://t.me/${CONFIG.botUsername}?start=${media.id}` }]],
-            },
-          })
-        }, CONFIG.timer * 1000)
-      }
-      return
-    }
-
     if (allMembers) {
+      if (mediaId !== '/start') {
+        const media = await prisma.media.findUnique({ where: { id: mediaId } })
+  
+        if (media && media.files.length > 0) {
+          const files = media.files
+          let messageIds = []
+  
+          if (media.type === 'L') {
+            const limitedFiles = files.slice(0, 40)
+            for (const file of limitedFiles) {
+              const message = await bot.sendPhoto(chatId, file.id)
+              messageIds.push(message.message_id)
+            }
+          } else {
+  
+            const limitedFiles = files.slice(0, 10)
+            const mediaGroup = limitedFiles .map(file => ({
+              type: file.type,
+              media: file.id
+            }))
+            const messages = await bot.sendMediaGroup(chatId, mediaGroup)
+            messageIds = messages.map(message => message.message_id)
+          }
+  
+          const warningMsg = await bot.sendMessage(chatId, texts.general.fileWarning)
+          messageIds.push(warningMsg.message_id)
+  
+          setTimeout( async () => {
+            for (const messageId of messageIds) {
+              await bot.deleteMessage(chatId, messageId);
+            }
+            bot.sendMessage(chatId, texts.general.deleteMedia, {
+              reply_markup: {
+                inline_keyboard: [[{ text: '♻️ دانلود مجدد', url: `https://t.me/${CONFIG.botUsername}?start=${media.id}` }]],
+              },
+            })
+          }, CONFIG.timer * 1000)
+        }
+        return
+      }
+
       if (user && user.role > 0) {
         bot.sendMessage(chatId, texts.general.welcome, adminMenu)
       } else {
@@ -84,7 +84,6 @@ export const Start = async (bot, ctx) => {
   } catch (error) {
     console.error('Error verifying user membership:', error)
     bot.sendMessage(chatId, texts.general.failMembershipCheck)
-
     return
   }
 }
