@@ -34,13 +34,18 @@ export const Start = async (bot, ctx) => {
           if (media.type === 'L') {
             const limitedFiles = files.slice(0, 40)
             for (const file of limitedFiles) {
-              const message = await bot.sendPhoto(chatId, file.id)
-              messageIds.push(message.message_id)
+              if (file.type === 'photo') {
+                const message = await bot.sendPhoto(chatId, file.id)
+                messageIds.push(message.message_id)
+              } else if (file.type === 'video') {
+                const message = await bot.sendVideo(chatId, file.id)
+                messageIds.push(message.message_id)
+              }
             }
           } else {
   
             const limitedFiles = files.slice(0, 10)
-            const mediaGroup = limitedFiles .map(file => ({
+            const mediaGroup = limitedFiles.map(file => ({
               type: file.type,
               media: file.id
             }))
@@ -62,6 +67,7 @@ export const Start = async (bot, ctx) => {
             })
           }, CONFIG.timer * 1000)
         }
+
         return
       }
 

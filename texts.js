@@ -37,7 +37,7 @@ export const texts = {
     getLink: (username, media, mediaTypeText) => `مدیا با نوع ( ${mediaTypeText} ) ایجاد شد ✅\n\nلینک مدیا: \n <code>https://t.me/${username}?start=${media.id}</code> \n شناسه مدیا: \n <code>${media.id}</code>`,
     addVideo: (limit, length) => `ویدیو با موفقیت به مدیا اضافه شد ✅\n\nتعداد آیتم ها: ${length}/${limit}\n جهت ذخیره و دریافت لینک قبل از پر شدن آیتم های مدیا کلمه ( <code>END</code> ) را ارسال کنید.`,
     addImage: (limit, length) => `عکس با موفقیت به مدیا اضافه شد ✅\n\nتعداد آیتم ها: ${length}/${limit}\n جهت ذخیره و دریافت لینک قبل از پر شدن آیتم های مدیا کلمه ( <code>END</code> ) را ارسال کنید.`,
-    editMedia: (data) => 'ادیت مدیا',
+    editMedia: (media) => `شناسه مدیا: <code>${media.id}</code>\n\n تعداد فایل ها: ${media.files.length}\n ${media.files.filter(file => file.type === 'photo').length} تصویر | ${media.files.filter(file => file.type === 'video').length} ویدیو`,
     fullMedia: (botUsername, media, mediaTypeText) => `مدیا با نوع ( ${mediaTypeText} ) پر شد 💯\n\nلینک مدیا: \n<code>https://t.me/${botUsername}?start=${media.id}</code>\n\nشناسه مدیا: \n<code>${media.id}</code>`,
     sendMedia: (media) => `مدیا با شناسه (<code>${media.id}</code>) ایجاد شد.\n\nلطفا فایل 📹 ویدیو یا 🖼 تصویر را جهت اضافه کردن به مدیا ارسال کنید:`,
 

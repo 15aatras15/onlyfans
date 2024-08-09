@@ -70,7 +70,7 @@ export const editMedia = async (bot, ctx, user) => {
   })
 
   await bot.sendMessage(chatId, texts.media.editMediaInfo, adminMenu)
-  await bot.sendMessage(chatId, texts.media.editMedia(), {
+  await bot.sendMessage(chatId, texts.media.editMedia(media), {
     reply_markup: {
       inline_keyboard: [
         [
