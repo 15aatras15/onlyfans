@@ -1,0 +1,30 @@
+{
+  "name": "vpn",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.4",
+    "prisma": "^5.16.1"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.16.1",
+    "axios": "^1.7.2",
+    "crypto-js": "^4.2.0",
+    "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
+    "jimp": "^0.22.12",
+    "node-telegram-bot-api": "^0.66.0",
+    "qrcode": "^1.5.3",
+    "qrcode-svg": "^1.1.0",
+    "sharp": "^0.33.4",
+    "uuid": "^10.0.0"
+  }
+}

@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  telegramId  Int           @unique
+  role        Int           @default(0) // 0: User, 1: Admin
+  status      String?
+  sentMessage SentMessage[] @relation("UserHandler")
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model SentMessage {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  chatId    String
+  messageId String
+  messages  String?
+  status    String   @default("pending") // "pending", "confirmed", or "deleted"
+  handlerId String?  @db.ObjectId
+  handler   User?    @relation("UserHandler", fields: [handlerId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Media {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  type      String   @default("L")
+  files     Json[]   @default([])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
