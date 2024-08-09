@@ -2,6 +2,7 @@ import { deletePublicMessage } from './admin/public-message.js'
 import { deleteMedia, sendMedia, sendMediaId } from './admin/media.js'
 import { verifyMembership } from './verify-membership.js'
 import { texts } from '../texts.js'
+import prisma from '../prisma/client.js'
 
 // Define user roles
 const USER_ROLES = {
