@@ -6,7 +6,7 @@ export const CONFIG = {
   botToken: process.env.BOT_TOKEN,
   apiId: process.env.API_ID,
   apiHash: process.env.API_HASH,
-  botUsername: 'onllllyfans_bot', // dont use @
+  botUsername: 'OFCLOUDBOT', // dont use @
   timer: 30, // secend
   channels: [
     {
