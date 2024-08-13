@@ -10,14 +10,9 @@ export const CONFIG = {
   timer: 30, // secend
   channels: [
     {
-      name: 'کتاب',
-      id: '-1002221848617',
-      link: 'https://t.me/Samary_book',
-    },
-    {
-      name: 'انگیسی',
-      id: '-1002228261162',
-      link: 'https://t.me/+EOMamSPS_H8zZjM0',
+      name: 'OnlyFans',
+      id: '-1002191204594',
+      link: 'https://t.me/onllyffans',
     },
   ],
 }
