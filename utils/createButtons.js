@@ -1,5 +1,5 @@
 // Function to create join channel buttons
-export const createJoinButtons = (channels, reverify) => {
+export const createJoinButtons = (channels, reverify, mediaId) => {
   // Create buttons for each channel
   const buttons = channels.map((channel) => [
     {
@@ -7,12 +7,12 @@ export const createJoinButtons = (channels, reverify) => {
       url: channel.link,
     },
   ])
-  
+
   // Add a button for confirming membership
   buttons.push([
     {
       text: 'عضو شدم ✅',
-      callback_data: reverify ? 'revrf_mem' : 'vrf_mem',
+      callback_data: `${reverify ? 'revrf_mem' : 'vrf_mem'}${mediaId ? `_${mediaId}` : ''}`,
     },
   ])
 

@@ -4,6 +4,7 @@ import { texts } from '../texts.js'
 import { adminMenu } from '../menu.js'
 import { CONFIG } from '../config.js'
 import prisma from '../prisma/client.js'
+import { sendMedia } from './media.js'
 
 // Handle the callback ctx for membership verification
 export const verifyMembership = async (bot, ctx) => {
@@ -24,12 +25,19 @@ export const verifyMembership = async (bot, ctx) => {
       await bot.deleteMessage(chatId, message.message_id)
       if (user && user.role === 1) {
         bot.sendMessage(chatId, texts.general.welcome, adminMenu)
+        
+        const mediaId = ctx.data.split('_').pop()
+        return await sendMedia(bot, chatId, mediaId)
       } else {
         bot.sendMessage(chatId, texts.general.welcome)
+
+        const mediaId = ctx.data.split('_').pop()
+        return await sendMedia(bot, chatId, mediaId)
       }
     } else {
-      const reverify = ctx.data === 'vrf_mem' ? false : true
-      const buttons = createJoinButtons(remainingChannels, reverify)
+      const mediaId = ctx.data.split('_').pop()
+      const reverify = ctx.data.startsWith('vrf_mem') ? false : true
+      const buttons = createJoinButtons(remainingChannels, reverify, mediaId)
       const newText = reverify
         ? texts.general.promptToRejoin(remainingChannels.length)
         : texts.general.promptToJoin
@@ -53,7 +61,7 @@ export const verifyMembership = async (bot, ctx) => {
       })
     }
   } catch (error) {
-    console.error('Error verifying user membership:', error)
-    bot.answerCallbackQuery(ctx.id, { text: texts.general.failMembershipCheck })
+    console.error(error)
+    bot.answerCallbackQuery(ctx.id, { text: texts.general.failProcess })
   }
 }

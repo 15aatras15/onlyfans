@@ -22,9 +22,9 @@ export const CallbackQuery = async (bot, ctx) => {
       show_alert: true,
     })
   }
-
+  
   // Handle membership verification for all users
-  if (ctx.data.endsWith('vrf_mem')) {
+  if (ctx.data.includes('vrf_mem')) {
     return await verifyMembership(bot, ctx, user)
   }
 

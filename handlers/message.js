@@ -41,6 +41,6 @@ export const Message = async (bot, ctx) => {
     }
   } catch (error) {
     console.error(error) // Log any errors
-    bot.sendMessage(chatId, texts.general.failProcess) // Send process error message to the user
+    return bot.sendMessage(chatId, texts.general.failProcess) // Send process error message to the user
   }
 }
