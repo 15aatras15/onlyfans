@@ -39,6 +39,6 @@ export const ChatMember = async (bot, ctx) => {
     }
     
   } catch (error) {
-    console.error('Error handling chat member update:', error)
+    console.log('Error handling chat member update:', error)
   }
 }

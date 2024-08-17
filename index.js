@@ -8,14 +8,15 @@ import TelegramBot from 'node-telegram-bot-api'
 // Create an instance of the Telegram bot
 const bot = new TelegramBot(CONFIG.botToken, { polling: true })
 
+try {
+  // Register event handlers
+  bot.onText(/\/start/, (ctx) => Start(bot, ctx))
 
-// Register event handlers
-bot.onText(/\/start/, (ctx) => Start(bot, ctx))
+  bot.on('callback_query', (ctx) => CallbackQuery(bot, ctx))
 
-bot.on('callback_query', (ctx) => CallbackQuery(bot, ctx))
+  bot.on('chat_member', (ctx) => ChatMember(bot, ctx))
 
-bot.on('chat_member', (ctx) => ChatMember(bot, ctx))
+  bot.on('message', (ctx) => Message(bot, ctx))
 
-bot.on('message', (ctx) => Message(bot, ctx))
-
-console.log('Bot is running...')
+  console.log('Bot is running...')
+} catch (error) {}

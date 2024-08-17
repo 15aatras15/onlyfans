@@ -14,7 +14,7 @@ export const checkMembershipChannels = async (bot, userId, channels) => {
         remainingChannels.push(channel)
       }
     } catch (error) {
-      console.error('Error fetching chat member status:', error)
+      console.log('Error fetching chat member status:', error)
       allMembers = false
       remainingChannels.push(channel)
     }

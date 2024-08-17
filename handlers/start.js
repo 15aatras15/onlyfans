@@ -49,7 +49,7 @@ export const Start = async (bot, ctx) => {
 
     return
   } catch (error) {
-    console.error(error)
+    console.log(error)
     return bot.sendMessage(chatId, texts.general.failProcess)
   }
 }

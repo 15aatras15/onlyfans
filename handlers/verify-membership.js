@@ -61,7 +61,7 @@ export const verifyMembership = async (bot, ctx) => {
       })
     }
   } catch (error) {
-    console.error(error)
+    console.log(error)
     bot.answerCallbackQuery(ctx.id, { text: texts.general.failProcess })
   }
 }
